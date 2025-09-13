@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Medical Appointment System Design Tokens */
+
+@layer base {
+  :root {
+    /* Medical color system */
+    --background: 0 0% 100%;
+    --foreground: 212 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 212 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 212 15% 15%;
+
+    /* Medical blue primary (#3b82f6) */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 91% 70%;
+    --primary-dark: 217 91% 50%;
+
+    /* Medical success green (#16a34a) */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 46%;
+
+    /* Medical error red (#dc2626) */
+    --error: 0 84% 60%;
+    --error-foreground: 0 0% 100%;
+    --error-light: 0 84% 70%;
+
+    /* Neutral system */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 212 15% 15%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 95%;
+    --accent-foreground: 217 91% 60%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 60%;
+
+    --radius: 0.75rem;
+
+    /* Medical gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(var(--success-light)));
+    --gradient-medical: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+
+    /* Medical shadows */
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-selected: 0 8px 25px -8px hsl(var(--primary) / 0.3);
+    --shadow-error: 0 4px 12px -4px hsl(var(--error) / 0.25);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground min-h-screen;
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Mobile optimizations */
+  .mobile-container {
+    min-height: 100dvh; /* Dynamic viewport height */
+    @apply w-full max-w-md mx-auto bg-background;
+  }
+
+  /* Form step animations */
+  .step-enter {
+    @apply opacity-0 translate-x-8;
+  }
+
+  .step-enter-active {
+    @apply opacity-100 translate-x-0 transition-all duration-300 ease-out;
+  }
+
+  .step-exit {
+    @apply opacity-100 translate-x-0;
+  }
+
+  .step-exit-active {
+    @apply opacity-0 -translate-x-8 transition-all duration-300 ease-out;
+  }
+
+  /* Medical form components */
+  .medical-card {
+    @apply bg-card rounded-xl p-6 shadow-[var(--shadow-card)] border border-border/50;
+  }
+
+  .medical-card-selected {
+    @apply shadow-[var(--shadow-selected)] border-primary/20 bg-accent/50;
+  }
+
+  .medical-button {
+    @apply min-h-[44px] transition-[var(--transition-fast)] rounded-lg font-medium;
+  }
+
+  .medical-input {
+    @apply min-h-[44px] text-base rounded-lg border-2 border-input bg-background px-4 py-3 transition-[var(--transition-fast)] focus:border-primary focus:ring-2 focus:ring-primary/20;
+  }
+
+  .medical-input.error {
+    @apply border-error shadow-[var(--shadow-error)] focus:border-error focus:ring-error/20;
+  }
+
+  .medical-input.success {
+    @apply border-success focus:border-success focus:ring-success/20;
+  }
+}
