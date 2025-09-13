@@ -136,7 +136,16 @@ const AppointmentForm = () => {
     <div className="mobile-container">
       <div className="flex flex-col h-screen">
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary to-primary-light p-4 text-primary-foreground">
+        <div className="bg-gradient-to-r from-primary to-primary-light p-4 text-primary-foreground relative">
+          {currentStep === 4 && (
+            <Button
+              variant="ghost"
+              onClick={handlePrev}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 p-0 text-primary-foreground hover:bg-white/10"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+          )}
           <h1 className="text-xl font-bold text-center mb-4">Agendar Cita Médica</h1>
           <StepIndicator currentStep={currentStep} totalSteps={4} />
         </div>
@@ -148,20 +157,20 @@ const AppointmentForm = () => {
           </div>
         </div>
 
-        {/* Navigation */}
-        <div className="p-4 border-t border-border/50 bg-background">
-          <div className="flex justify-between gap-4">
-            <Button
-              variant="outline"
-              onClick={handlePrev}
-              disabled={currentStep === 1}
-              className="flex-1 medical-button"
-            >
-              <ChevronLeft className="w-4 h-4 mr-2" />
-              Anterior
-            </Button>
-            
-            {currentStep < 4 ? (
+        {/* Navigation - Only show for steps 1-3 */}
+        {currentStep < 4 && (
+          <div className="p-4 border-t border-border/50 bg-background">
+            <div className="flex justify-between gap-4">
+              <Button
+                variant="outline"
+                onClick={handlePrev}
+                disabled={currentStep === 1}
+                className="flex-1 medical-button"
+              >
+                <ChevronLeft className="w-4 h-4 mr-2" />
+                Anterior
+              </Button>
+              
               <Button
                 onClick={handleNext}
                 disabled={!validateCurrentStep()}
@@ -170,16 +179,9 @@ const AppointmentForm = () => {
                 Siguiente
                 <ChevronRight className="w-4 h-4 ml-2" />
               </Button>
-            ) : (
-              <Button
-                onClick={handleSubmit}
-                className="flex-1 medical-button bg-success hover:bg-success-light"
-              >
-                Confirmar Cita
-              </Button>
-            )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
