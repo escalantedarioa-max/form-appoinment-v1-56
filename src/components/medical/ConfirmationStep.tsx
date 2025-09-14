@@ -21,6 +21,7 @@ interface ConfirmationStepProps {
   appointmentData: AppointmentData;
   onReasonUpdate: (reason: string) => void;
   onSubmit: () => void;
+  onBack?: () => void;
 }
 
 const specialties = {
@@ -41,7 +42,8 @@ const specialties = {
 export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
   appointmentData,
   onReasonUpdate,
-  onSubmit
+  onSubmit,
+  onBack
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -220,6 +222,17 @@ export const ConfirmationStep: React.FC<ConfirmationStepProps> = ({
           </div>
         )}
       </Button>
+
+      {/* Back Button */}
+      {onBack && (
+        <Button
+          variant="outline"
+          onClick={onBack}
+          className="w-full h-12 text-base font-medium border-muted-foreground/20 text-muted-foreground hover:bg-muted hover:text-foreground mt-3"
+        >
+          Volver
+        </Button>
+      )}
     </div>
   );
 };
