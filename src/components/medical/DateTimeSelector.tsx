@@ -8,6 +8,7 @@ interface DateTimeSelectorProps {
   selectedDate: Date | null;
   selectedTime: string;
   onUpdate: (date: Date | null, time: string) => void;
+  onBack?: () => void;
 }
 
 const generateAvailableDates = () => {
@@ -40,7 +41,8 @@ const generateTimeSlots = () => {
 export const DateTimeSelector: React.FC<DateTimeSelectorProps> = ({
   selectedDate,
   selectedTime,
-  onUpdate
+  onUpdate,
+  onBack
 }) => {
   const [currentDateIndex, setCurrentDateIndex] = useState(0);
   const availableDates = generateAvailableDates();
@@ -179,6 +181,19 @@ export const DateTimeSelector: React.FC<DateTimeSelectorProps> = ({
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Back Button */}
+      {onBack && (
+        <div className="pt-4">
+          <Button
+            variant="outline"
+            onClick={onBack}
+            className="w-full h-12 text-base font-medium border-muted-foreground/20 text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            Volver
+          </Button>
         </div>
       )}
     </div>

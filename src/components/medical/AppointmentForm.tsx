@@ -117,6 +117,7 @@ const AppointmentForm = () => {
             selectedDate={appointmentData.date}
             selectedTime={appointmentData.time}
             onUpdate={updateDateTime}
+            onBack={handlePrev}
           />
         );
       case 4:
